@@ -25,14 +25,12 @@ BuildRequires: krb5-devel
 BuildRequires: meson
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(libbrotlidec)
-BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(libpsl)
 BuildRequires: pkgconfig(sqlite3)
 BuildRequires: pkgconfig(sysprof-capture-4)
 BuildRequires: vala
 BuildRequires: /usr/bin/ntlm_auth
 BuildRequires: pkgconfig(libnghttp2)
-BuildRequires: pkgconfig(gnutls)
 
 Recommends: glib-networking%{?_isa} >= %{glib2_version}
 
@@ -77,7 +75,7 @@ This package contains developer documentation for %{name}.
 %global gtkdoc_flags -Dgtk_doc=false
 %endif
 
-%meson %gtkdoc_flags -Dtests=false -Dautobahn=disabled -Dhttp2_tests=disabled
+%meson %gtkdoc_flags -Dtests=false -Dautobahn=disabled -Dhttp2_tests=disabled -Dpkcs11_tests=disabled
 %meson_build
 
 %install
