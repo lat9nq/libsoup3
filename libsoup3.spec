@@ -4,7 +4,7 @@
 %{!?with_docs: %global with_docs 1}
 
 Name: libsoup3
-Version: 3.0.4
+Version: 3.0.5
 Release: %autorelease
 Summary: Soup, an HTTP library implementation
 
