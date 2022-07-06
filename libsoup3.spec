@@ -1,23 +1,18 @@
-%global glib2_version 2.58.0
-
-# Coverity scan can override this to 0, to skip checking in gtk-doc generated code
-%{!?with_docs: %global with_docs 1}
+%global glib2_version 2.69.1
 
 Name:    libsoup3
-Version: 3.0.7
+Version: 3.1.1
 Release: %autorelease
 Summary: Soup, an HTTP library implementation
 
 License: LGPLv2
 URL:     https://wiki.gnome.org/Projects/libsoup
-Source0: https://download.gnome.org/sources/libsoup/3.0/libsoup-%{version}.tar.xz
+Source0: https://download.gnome.org/sources/libsoup/3.1/libsoup-%{version}.tar.xz
 
 BuildRequires: gcc
 BuildRequires: gettext
 BuildRequires: glib-networking
-%if %{with_docs}
-BuildRequires: gtk-doc
-%endif
+BuildRequires: gi-docgen >= 2021.1
 BuildRequires: krb5-devel
 BuildRequires: meson
 BuildRequires: vala
@@ -53,8 +48,6 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Libsoup is an HTTP library implementation in C. This package allows
 you to develop applications that use the libsoup library.
 
-%if %{with_docs}
-
 %package doc
 Summary: Documentation files for %{name}
 BuildArch: noarch
@@ -62,19 +55,11 @@ BuildArch: noarch
 %description doc
 This package contains developer documentation for %{name}.
 
-%endif
-
 %prep
 %autosetup -p0 -n libsoup-%{version}
 
 %build
-%if %{with_docs}
-%global gtkdoc_flags -Dgtk_doc=true
-%else
-%global gtkdoc_flags -Dgtk_doc=false
-%endif
-
-%meson %gtkdoc_flags -Dtests=false -Dautobahn=disabled -Dhttp2_tests=disabled -Dpkcs11_tests=disabled
+%meson -Ddocs=enabled -Dtests=false -Dautobahn=disabled -Dhttp2_tests=disabled -Dpkcs11_tests=disabled
 %meson_build
 
 %install
@@ -100,14 +85,8 @@ This package contains developer documentation for %{name}.
 %{_datadir}/vala/vapi/libsoup-3.0.deps
 %{_datadir}/vala/vapi/libsoup-3.0.vapi
 
-%if %{with_docs}
-
 %files doc
-%dir %{_datadir}/gtk-doc
-%dir %{_datadir}/gtk-doc/html
-%{_datadir}/gtk-doc/html/libsoup-3.0
-
-%endif
+%{_docdir}/libsoup-3.0/
 
 %changelog
 %autochangelog
