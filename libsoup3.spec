@@ -3,34 +3,33 @@
 # Coverity scan can override this to 0, to skip checking in gtk-doc generated code
 %{!?with_docs: %global with_docs 1}
 
-Name: libsoup3
-Version: 3.0.6
+Name:    libsoup3
+Version: 3.0.7
 Release: %autorelease
 Summary: Soup, an HTTP library implementation
 
 License: LGPLv2
-URL: https://wiki.gnome.org/Projects/libsoup
+URL:     https://wiki.gnome.org/Projects/libsoup
 Source0: https://download.gnome.org/sources/libsoup/3.0/libsoup-%{version}.tar.xz
-Patch0: xgettext.patch
 
 BuildRequires: gcc
 BuildRequires: gettext
-BuildRequires: pkgconfig(glib-2.0)
-BuildRequires: pkgconfig(gio-2.0)
 BuildRequires: glib-networking
 %if %{with_docs}
 BuildRequires: gtk-doc
 %endif
 BuildRequires: krb5-devel
 BuildRequires: meson
+BuildRequires: vala
+BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(gio-2.0)
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(libbrotlidec)
+BuildRequires: pkgconfig(libnghttp2)
 BuildRequires: pkgconfig(libpsl)
 BuildRequires: pkgconfig(sqlite3)
 BuildRequires: pkgconfig(sysprof-capture-4)
-BuildRequires: vala
 BuildRequires: /usr/bin/ntlm_auth
-BuildRequires: pkgconfig(libnghttp2)
 
 Recommends: glib-networking%{?_isa} >= %{glib2_version}
 
@@ -88,14 +87,14 @@ This package contains developer documentation for %{name}.
 %doc README NEWS AUTHORS
 %{_libdir}/libsoup-3.0.so.0*
 %dir %{_libdir}/girepository-1.0
-%{_libdir}/girepository-1.0/Soup*3.0.typelib
+%{_libdir}/girepository-1.0/Soup-3.0.typelib
 
 %files devel
 %{_includedir}/libsoup-3.0
 %{_libdir}/libsoup-3.0.so
-%{_libdir}/pkgconfig/*.pc
+%{_libdir}/pkgconfig/libsoup-3.0.pc
 %dir %{_datadir}/gir-1.0
-%{_datadir}/gir-1.0/Soup*3.0.gir
+%{_datadir}/gir-1.0/Soup-3.0.gir
 %dir %{_datadir}/vala
 %dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/libsoup-3.0.deps
