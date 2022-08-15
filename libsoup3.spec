@@ -1,7 +1,7 @@
 %global glib2_version 2.69.1
 
 Name:    libsoup3
-Version: 3.1.1
+Version: 3.1.2
 Release: %autorelease
 Summary: Soup, an HTTP library implementation
 
@@ -59,7 +59,7 @@ This package contains developer documentation for %{name}.
 %autosetup -p0 -n libsoup-%{version}
 
 %build
-%meson -Ddocs=enabled -Dtests=false -Dautobahn=disabled -Dhttp2_tests=disabled -Dpkcs11_tests=disabled
+%meson -Ddocs=enabled -Dtests=false -Dautobahn=disabled -Dpkcs11_tests=disabled
 %meson_build
 
 %install
