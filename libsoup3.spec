@@ -17,7 +17,6 @@ Patch0: 310.patch
 BuildRequires: gcc
 BuildRequires: gettext
 BuildRequires: glib-networking
-BuildRequires: gi-docgen >= 2021.1
 BuildRequires: krb5-devel
 BuildRequires: meson
 BuildRequires: vala
@@ -53,18 +52,11 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Libsoup is an HTTP library implementation in C. This package allows
 you to develop applications that use the libsoup library.
 
-%package doc
-Summary: Documentation files for %{name}
-BuildArch: noarch
-
-%description doc
-This package contains developer documentation for %{name}.
-
 %prep
 %autosetup -p1 -n libsoup-%{version}
 
 %build
-%meson -Ddocs=enabled -Dtests=false -Dautobahn=disabled -Dpkcs11_tests=disabled
+%meson -Ddocs=disabled -Dtests=false -Dautobahn=disabled -Dpkcs11_tests=disabled
 %meson_build
 
 %install
@@ -89,9 +81,6 @@ This package contains developer documentation for %{name}.
 %dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/libsoup-3.0.deps
 %{_datadir}/vala/vapi/libsoup-3.0.vapi
-
-%files doc
-%{_docdir}/libsoup-3.0/
 
 %changelog
 %autochangelog
